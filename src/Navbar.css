@@ -1,0 +1,96 @@
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    
+    padding: 10px 12px;
+    position: fixed;
+    top: 5px;
+    
+    width: 99%;
+    height: 50px;
+    z-index: 10 ;
+   
+    
+}
+#lost {
+    color: black;
+    padding-top: 10px;
+    border-bottom: none;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 650;
+    font-size: xx-large;
+    opacity: 0.8;
+    text-shadow :white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-decoration: none;
+}
+
+.nav-menu{
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li{
+    padding: 0 1rem;
+    color: black;
+}
+
+.nav-menu li a{
+    font-family: Poppins;
+    font-weight: 550;
+    font-size: large;
+    color: black;
+    text-decoration: none;
+
+}
+.hamburger{
+    display: none;
+}
+/* responsive design for mobile devices */
+@media screen and (max-width:1040px){
+    .nav-menu{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width:100%;
+        height:100vh;
+        background:rgba(0,0,0,0.9);
+        position:absolute;
+        top: 0;
+        left: -120%;
+        z-index: -3;
+        transition: 0.3s;
+        color: black;
+   
+    }
+    .nav-menu.active{
+        left: 0;
+
+    }
+    .nav-menu li{
+        padding: 1rem 0;
+        }
+    .nav-menu li a {
+        font-size: 2rem;
+    }
+    .hamburger{
+        display: initial;
+    }
+}
+#search {
+    font-size: xx-large;
+    margin-top: 10px;
+
+
+}
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+#logoutbtn{
+    color: brown;
+    background-color: wheat;
+}
