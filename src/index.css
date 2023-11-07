@@ -4,5 +4,7 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
