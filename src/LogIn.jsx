@@ -1,35 +1,29 @@
 // SignUp.js
 
 import React, { useState } from "react";
-import "./SignUp.css";
-import { Link,useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
+function LogIn({
+  jwToken,
+  setJWToken,
+  btnText,
+  setUsername,
+  setRole,
+  setIsLoggedIn,
+  role,
+  setBtnText,
+  isLoggedIn,
+}) {
+  const history = useNavigate();
 
-function LogIn(
-  {
-    jwToken,
-    setJWToken,
-    btnText ,
-    setUsername,
-    setRole ,
-    setIsLoggedIn,
-    role ,
-    setBtnText,
-    isLoggedIn,
-  }
-) {
-    const history = useNavigate();
-    
   const [formData, setFormData] = useState({
     username: "",
-    password: "", // State for the Remember Me checkbox
+    password: "",
   });
 
   const handleSubmit = (event) => {
     event.preventDefault();
-   
-    // TODO: Submit form data to backend
-   
+
     fetch("http://127.0.0.1:5555/lost&found/login", {
       method: "POST",
       headers: {
@@ -49,65 +43,60 @@ function LogIn(
         localStorage.setItem("jwtToken", data.access_token);
         setIsLoggedIn(true);
 
-        // const username_uppper = toTitleCase(data.username);
         setBtnText(`Logout, ${data.username}`);
-        console.log(data.username)
-        history("/HomePage")
+        console.log(data.username);
+        history("/HomePage");
         setFormData({
           username: "",
           password: "",
         });
         setJWToken(data.access_token);
-        setRole(data.role)
+        setRole(data.role);
         setUsername(data.username);
       })
       .catch((response) => {
         console.error("Error:", response.message);
       });
 
-
     console.log("Form Data:", formData);
   };
 
-
   return (
-    <div className="sign-up-container">
-      
-      <form onSubmit={handleSubmit}>
-      <h1>Log In</h1>
-        <input
-          type="text"
-          name="username"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(event) => {
-            setFormData({ ...formData, username: event.target.value });
-          }}
-        />
-      
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={(event) => {
-            setFormData({ ...formData, password: event.target.value });
-          }}
-        />
+    <div className="flex items-center justify-center min-h-screen">
+      <form onSubmit={handleSubmit} className="w-full max-w-md p-4 mt-2 rounded bg-gray-100" style={{ maxHeight: '700px' }}>
 
-        {/* Remember Me Checkbox
-        <div className="remember-me">
+      <h1 className="font-bold text-2xl border-b-2 border-green-500 mb-4">Login</h1>
+        <div className="mb-2">
           <input
-            type="checkbox"
-            id="rememberMe"
-            name="rememberMe"
-            checked={formData.rememberMe}
-            onChange={handleCheckboxChange}
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={(event) =>
+              setFormData({ ...formData, username: event.target.value })
+            }
+            className="w-full p-2 border border-gray-300 rounded"
           />
-          <label htmlFor="rememberMe">Remember Me</label>
-        </div> */}
-
-        <button type="submit">Log in</button>
+        </div>
+        <div className="mb-4">
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={(event) =>
+              setFormData({ ...formData, password: event.target.value })
+            }
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full p-2 rounded bg-green-500 hover:bg-green-700 text-white font-bold transition duration-300"
+          style={{ maxWidth: "150px" }}
+        >
+          Log in
+        </button>
       </form>
     </div>
   );

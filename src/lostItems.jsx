@@ -9,7 +9,6 @@ function LostItems() {
     fetch('http://127.0.0.1:5555/lost&found/lostitems') // Replace 'https://example.com/lost-items' with your API endpoint or local file
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setLostItems(data);
       })
       .catch((error) => {
@@ -20,8 +19,8 @@ function LostItems() {
 
   return (
     <div className='lostItems'>
+      <Navbar />
       <div className="cards-container">
-
         {lostItems.map((data, index) => (
           <div className="card" key={index}>
             <button id='deleteBtn'>X</button>
