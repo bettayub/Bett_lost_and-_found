@@ -1,6 +1,7 @@
 // SignUp.js
 
 import React, { useState } from "react";
+import "./SignUp.css";
 import { Link,useNavigate } from 'react-router-dom'
 
 

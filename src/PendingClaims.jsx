@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import './PendingClaims.css';
+
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+// import showConfirmationDialog from './Confironpendingitem';
+// import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 
 
 function PendingClaims() {
   const [Claimeditems, setClaimedtems] = useState([]);
+  const MySwal = withReactContent(Swal);
+
 
   useEffect(() => {
     fetch('http://127.0.0.1:5555/lost&found/pendingclaim_items') // Replace 'https://example.com/lost-items' with your API endpoint or local file
@@ -20,9 +26,38 @@ function PendingClaims() {
       });
   }, []); // Empty dependency array to run the effect only once
 
-const Handleonapprove = (e)=>{
  
-}
+  const Handleonapprove = async (e , item) => {
+console.log(item);
+    try {
+      const response = await fetch(`http://127.0.0.1:5555/lost&found/approve_claimed_item/${item.id}`, {
+        method: 'PUT', // Use PATCH or PUT depending on your server's API
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          status: 'claimed',
+        }),
+      });
+     
+      if (!response.ok) {
+        throw new Error('Network response was not ok: ${response.status}');
+      }
+
+      MySwal.fire({
+        icon: 'success',
+        title: 'Approved Successfully',
+        showConfirmButton: false,
+        timer: 1500 // Automatically close after 1.5 seconds
+      });
+  
+      // Assuming you want to update the UI immediately upon successful request
+    } catch (error) {
+      console.error('Error updating status:', error);
+      // Handle errors as needed
+    }
+  };
+  
 
 
 
@@ -60,6 +95,7 @@ const Handleonapprove = (e)=>{
           </tr>
 
           {Claimeditems.map((item, index) => (
+  
             <tr key={item.id}>
               <td style={{ marginBottom: "10px" }}>{index + 1}</td>
               <td>
@@ -68,7 +104,8 @@ const Handleonapprove = (e)=>{
               <td>{item.user_id}</td>
               <td>{item.status}</td>
               <td
-                onClick={Handleonapprove}
+                // onClick ={(e)=>showConfirmationDialog(item , Handleonapprove)}
+                onClick={(e)=>Handleonapprove(e , item)}
               >Approve</td>
             </tr>
           ))}

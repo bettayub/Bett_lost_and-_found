@@ -3,11 +3,13 @@ import { BrowserRouter, Routes, Route  , Navigate} from 'react-router-dom';
 import Home from './Home';
 import AddItems from './addItems';
 import ReturnedItems from './ReturnedItems';
+import Lostitemsuser from './lostitemsuser';
 import LostItems from './lostItems';
 import FoundItems from './FoundItems';
 import ReceivedRewards from './receivedRewards';
 import PendingClaims from './PendingClaims';
 import  ApplicationForm from './foundApplication'
+import RedirectAdmin from './RedirectAdmin';
 import ApplicationFormLost from './lostAplication';
 import SignUp from './SignUp';
 import AdminLogIn from './AdminLogIn'
@@ -16,6 +18,7 @@ import Navbar from './Navbar';
 import LogIn from './LogIn'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [jwToken , setJWToken] = useState("");
@@ -57,15 +60,60 @@ function App() {
         btnText = {btnText}
         />} /> 
         <Route path ='/adminLogIn'  element={<AdminLogIn/>}/>
-        <Route path="/HomePage" element={<Home
+        <Route path="/HomePage" 
+         element={
+          jwToken === "" ? (
+            <>
+              <Navigate to="/redirect" />
+            </>
+          ) : (
+            <Home
          textbtn = {btnText}
-        />}/>
+        />
+          )
+        }
+        />
         <Route path="/add" element={<AddItems/>}/>
-        <Route path="/returned" element={<ReturnedItems/>}/>
-        <Route path="/lost" element={<LostItems/>}/>
+        <Route path="/returned"
+          element={
+            jwToken === "" ? (
+              <>
+                <Navigate to="/redirect" />
+              </>
+            ) : (
+              <ReturnedItems/>
+            )
+          }
+        
+        />
+       
+
+
+        
+     <Route
+  path="/lost"
+  element={
+    jwToken === "" ? (
+      <>
+        <Navigate to="/redirect" />
+      </>
+    ) : (
+      role === "Admin" ? (
+        <>
+      {/* <Lostitemsuser/> */}
+          <LostItems /> 
+        </>
+      ) : (
+        <Navigate to="/redirectadmin" />
+      )
+    )
+  }
+/>
+      
+        
         <Route path="/found" element={
 
-         role === "User" ? (
+         jwToken === "" ? (
           <>
             <Navigate to="/redirect" />
           </>
@@ -74,20 +122,41 @@ function App() {
         )
       }/>
       
-        <Route path='/pendingclaims' element= {
-
-role === "User" ? (
- <>
-   <Navigate to="/redirect" />
- </>
-) : (
-  <PendingClaims/>
-)
-}/>
-        <Route path="/received" element={<ReceivedRewards/>}/>
+        <Route path='/pendingclaims' 
+         element={
+          jwToken === "" ? (
+            <>
+              <Navigate to="/redirect" />
+            </>
+          ) : (
+            role === "user" ? (
+              <>
+              <Navigate to="/redirectadmin" />
+            {/* <Lostitemsuser/> */}
+                <LostItems /> 
+              </>
+            ) : (
+             <PendingClaims/>
+            )
+          )
+        }
+        
+        />
+        <Route path="/received" 
+          element={
+            jwToken === "" ? (
+              <>
+                <Navigate to="/redirect" />
+              </>
+            ) : (
+              <ReceivedRewards/>
+            )
+          }
+       />
         <Route path="/foundApplication" element={<ApplicationForm/>}/>
         <Route path="/lostApplication" element={<ApplicationFormLost/>}/>
         <Route path="/redirect" element={<Redirect />} />
+        <Route path="/redirectadmin" element={<RedirectAdmin />} />
       </Routes>
     </BrowserRouter>
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Redirect = () => {
+const RedirectAdmin = () => {
   return (
     <div>
       <h1
@@ -14,10 +14,10 @@ const Redirect = () => {
         }}
       >
         Sorry, You are not authorized to view this page. Click{" "}
-        <Link to="/login" >here</Link> to login and view the page.
+        <Link to="/login" >here</Link> Only admins can
       </h1>
     </div>
   );
 };
 
-export default Redirect;
+export default RedirectAdmin;
