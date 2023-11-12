@@ -52,12 +52,12 @@ Make sure you have the following installed:
 
 1. **Clone the Repository:**
    ```bash
-   git clone git@github.com:BettLawi/Team-Lost-and-Found-Frontend.git
+   https://github.com/bettayub/Bett_lost_and-_found_frontend
 
 
 2. **Change to the Project Directory:**
    ```bash
-   cd Team-Lost-and-Found-Frontend
+   cd Bett_lost_and-_found_frontend
    ```
 
 3. **Install Dependencies:**
@@ -93,15 +93,6 @@ Make sure you have the following installed:
 - Users can view and manage their rewards through an interactive interface.
 - Visual cues and notifications for users receiving rewards, fostering user engagement.
 
-## Developers
-
-The Lost and Found App frontend was developed by the following team:
-
-- Lawi
-- James
-- Vany
-- Kennedy
-- Ayub
 
 ## Contributing
 
@@ -109,15 +100,8 @@ We welcome contributions! If you'd like to contribute to the development of the 
 
 ## Contact
 
-For any inquiries, please contact us at [lostandfound656@gmail.com](mailto:lostandfound656@gmail.com).
+bettayub19@gmail.com
 
-## Social Media
-
-Follow us on social media for updates and announcements:
-
-- [Twitter]
-- [Facebook]
-- [Instagram]
 
 ## License
 
